@@ -42,4 +42,13 @@ io.on('connection', (socket) => {
             activeUsers: peers
         })
     })
+
+    socket.on('disconnect', () => {
+        console.log('User disconnected')
+        peers = peers.filter(peer => peer.socketId !==socket.id)
+        io.sockets.emit('broadcast', {
+            event: broadcastEventTypes.ACTIVE_USERS,
+            activeUsers: peers
+        })
+    })
 })

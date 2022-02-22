@@ -82,4 +82,11 @@ io.on('connection', (socket) => {
             answer: data.answer
         })
     })
+
+    socket.on('webRTC-candidate', (data) => {
+        console.log('Handling ice candidate')
+        io.to(data.connectedUserSocketId.emit('webRTC-candidate'), {
+            candidate: data.candidate
+        })
+    })
 })

@@ -71,21 +71,21 @@ io.on('connection', (socket) => {
 
     socket.on('webRTC-offer', (data) => {
         console.log('Handling webRTC offer')
-        io.to(data.calleeSocketId.emit('webRTC-offer', {
+        io.to(data.calleeSocketId).emit('webRTC-offer', {
             offer: data.offer
-        }))
+        })
     })
 
     socket.on('webRTC-answer', (data) => {
         console.log('Handling webRTC answer')
-        io.to(data.callerSocketId.emit('webRTC-answer'), {
+        io.to(data.callerSocketId).emit('webRTC-answer', {
             answer: data.answer
         })
     })
 
     socket.on('webRTC-candidate', (data) => {
         console.log('Handling ice candidate')
-        io.to(data.connectedUserSocketId.emit('webRTC-candidate'), {
+        io.to(data.connectedUserSocketId).emit('webRTC-candidate', {
             candidate: data.candidate
         })
     })

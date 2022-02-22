@@ -75,4 +75,11 @@ io.on('connection', (socket) => {
             offer: data.offer
         }))
     })
+
+    socket.on('webRTC-answer', (data) => {
+        console.log('Handling webRTC answer')
+        io.to(data.callerSocketId.emit('webRTC-answer'), {
+            answer: data.answer
+        })
+    })
 })
